@@ -107,8 +107,8 @@ Param (
     $runScript
 )
 
-. .\utils.ps1
 $web = new-object net.webclient
+iex $web.downloadstring('https://raw.githubusercontent.com/9whirls/webcommander_walnut/master/powershell/utils.ps1')
 iex $web.downloadstring('https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/ssh/object.ps1')
 
 $serverList = @($serverAddress.split(",") | %{$_.trim()})

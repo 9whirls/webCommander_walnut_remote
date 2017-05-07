@@ -1,0 +1,450 @@
+[{
+	"script": "https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/adsi/interfaces.ps1",
+	"description": "Configure Windows LDAP via ADSI",
+	"developer": "whirls9@hotmail.com",
+	"functionalities": ["AD"],
+	"synopsis": "ADSI actions",
+	"parameters": [{
+		"name": "serverAddress",
+		"helpmessage": "IP or FQDN of the remote Windows machine",
+		"mandatory": 1
+	},
+	{
+		"name": "port",
+		"helpmessage": "Port number, default is 389"
+	},
+	{
+		"name": "serverUser",
+		"helpmessage": "User name to connect to the remote Windows machine, in form of \u0027domain\\username\u0027",
+		"mandatory": 1
+	},
+	{
+		"name": "serverPassword",
+		"helpmessage": "Password of the user",
+		"type": "password"
+	},
+	{
+		"name": "dn",
+		"helpmessage": "Distinguished name",
+		"mandatory": 1
+	},
+	{
+		"name": "filter",
+		"helpmessage": "Filter"
+	},
+	{
+		"name": "property",
+		"helpmessage": "Property name or \u0027name=value\u0027 pairs. Each definition per line. \n      If value contains multiple items, separate them by comma.",
+		"mandatory": 1,
+		"type": "textarea"
+	},
+	{
+		"name": "action",
+		"helpmessage": "Action, default is get",
+		"options": ["get",
+		"clear",
+		"update",
+		"append",
+		"delete"],
+		"type": "option"
+	}]
+},
+{
+	"script": "https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/ssh/interfaces.ps1",
+	"description": "Run commands on SSH servers.\nCopy files to SFTP servers.",
+	"developer": "whirls9@hotmail.com",
+	"functionalities": [],
+	"synopsis": "SSH actions",
+	"parametersets": ["runScript",
+	"uploadFile"],
+	"parameters": [{
+		"name": "serverAddress",
+		"helpmessage": "IP or FQDN of SSH or SFTP server. Support multiple values seperated by comma.",
+		"mandatory": 1
+	},
+	{
+		"name": "serverUser",
+		"helpmessage": "User name to connect to the server (default is root)"
+	},
+	{
+		"name": "serverPassword",
+		"helpmessage": "Password of the user",
+		"type": "password"
+	},
+	{
+		"name": "fileUrl",
+		"helpmessage": "Files to copy from local server or online. Each file per line.",
+		"type": "textarea",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "file",
+		"helpmessage": "File to upload from client machine",
+		"type": "file",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "destination",
+		"helpmessage": "Destination path, such as /home/temp/",
+		"mandatory": 1,
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "protocol",
+		"helpmessage": "Protocol",
+		"options": ["scp",
+		"sftp"],
+		"type": "option",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "uploadFile",
+		"helpmessage": "Upload file to remote machine",
+		"type": "switch",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "scriptText",
+		"helpmessage": "Script text",
+		"mandatory": 1,
+		"type": "textarea",
+		"parametersets": ["runScript"]
+	},
+	{
+		"name": "outputCheck",
+		"helpmessage": "Method to check if specific string could (or could not) be found in output. Default is \u0027like\u0027.",
+		"options": ["like",
+		"notlike",
+		"match",
+		"notmatch"],
+		"type": "option",
+		"parametersets": ["runScript"]
+	},
+	{
+		"name": "pattern",
+		"helpmessage": "String pattern to find",
+		"parametersets": ["runScript"]
+	},
+	{
+		"name": "runScript",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["runScript"]
+	}]
+},
+{
+	"script": "https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/windows/interfaces.ps1",
+	"description": "Configure Windows machine remotely",
+	"developer": "liuj@vmware.com",
+	"functionalities": [],
+	"synopsis": "Windows configurations",
+	"parametersets": ["autoLogon",
+	"changeHostname",
+	"checkWindowsUpdate",
+	"enableRdp",
+	"joinDomain",
+	"listApp",
+	"readFile",
+	"restart",
+	"runScript",
+	"shutdown",
+	"uploadFile",
+	"windowsUpdate",
+	"windowsUpdateSync"],
+	"parameters": [{
+		"name": "winAddress",
+		"helpmessage": "IP / FQDN of target Windows machine. Support multiple values separated by comma.",
+		"mandatory": 1
+	},
+	{
+		"name": "winUser",
+		"helpmessage": "User of target Windows machine (default is administrator)"
+	},
+	{
+		"name": "winPassword",
+		"helpmessage": "Password of winUser",
+		"type": "password"
+	},
+	{
+		"name": "newHostName",
+		"helpmessage": "New host name. Support multiple values separated by comma.",
+		"mandatory": 1,
+		"parametersets": ["changeHostname"]
+	},
+	{
+		"name": "changeHostname",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["changeHostname"]
+	},
+	{
+		"name": "enableRdp",
+		"helpmessage": "Enable RDP access to the Windows machine",
+		"type": "switch",
+		"parametersets": ["enableRdp"]
+	},
+	{
+		"name": "file",
+		"helpmessage": "Select a file",
+		"mandatory": 1,
+		"type": "file",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "destination",
+		"helpmessage": "Destination path. Default is c:\\temp\\",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "uploadFile",
+		"helpmessage": "Upload file to remote Windows machine",
+		"type": "switch",
+		"parametersets": ["uploadFile"]
+	},
+	{
+		"name": "filePath",
+		"helpmessage": "File path",
+		"mandatory": 1,
+		"parametersets": ["readFile"]
+	},
+	{
+		"name": "numberOfLine",
+		"helpmessage": "Number of lines to read. Count from top if positive; \n      Count from bottom if negative. Read all if not defined.",
+		"parametersets": ["readFile"]
+	},
+	{
+		"name": "readFile",
+		"helpmessage": "Get file content from remote Windows machine",
+		"type": "switch",
+		"parametersets": ["readFile"]
+	},
+	{
+		"name": "listApp",
+		"helpmessage": "List installed application",
+		"type": "switch",
+		"parametersets": ["listApp"]
+	},
+	{
+		"name": "restart",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["restart"]
+	},
+	{
+		"name": "shutdown",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["shutdown"]
+	},
+	{
+		"name": "checkWindowsUpdate",
+		"helpmessage": "Search availabe Windows Updates on internet",
+		"type": "switch",
+		"parametersets": ["checkWindowsUpdate"]
+	},
+	{
+		"name": "updateServer",
+		"helpmessage": "Windows update server from which to download updates, default is \u0027Internal\u0027",
+		"options": ["Internal",
+		"External"],
+		"mandatory": 1,
+		"type": "option",
+		"parametersets": ["windowsUpdate",
+		"windowsUpdateSync"]
+	},
+	{
+		"name": "severity",
+		"helpmessage": "Severity of the update to install, default is \u0027Critical\u0027",
+		"options": ["Critical",
+		"Important",
+		"Moderate",
+		"Low",
+		"All"],
+		"mandatory": 1,
+		"type": "option",
+		"parametersets": ["windowsUpdate",
+		"windowsUpdateSync"]
+	},
+	{
+		"name": "windowsUpdate",
+		"helpmessage": "Trigger Windows update",
+		"type": "switch",
+		"parametersets": ["windowsUpdate"]
+	},
+	{
+		"name": "windowsUpdateSync",
+		"helpmessage": "Run Windows update synchronously",
+		"type": "switch",
+		"parametersets": ["windowsUpdateSync"]
+	},
+	{
+		"name": "scriptText",
+		"helpmessage": "Script text",
+		"mandatory": 1,
+		"type": "textarea",
+		"parametersets": ["runScript"]
+	},
+	{
+		"name": "scriptType",
+		"helpmessage": "Script type.\n      Bat: asynchronous, command returns immediately after triggering the script\n      Powershell: synchronous, command returns on script completion\n      Interactive: synchronous, guestUser must have already logged on\n      InteractivePs1: synchronous, guestUser must have already logged on",
+		"options": ["Bat",
+		"Powershell",
+		"Interactive",
+		"InteractivePs1"],
+		"type": "option",
+		"parametersets": ["runScript"]
+	},
+	{
+		"name": "runScript",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["runScript"]
+	},
+	{
+		"name": "action",
+		"helpmessage": "If enable, winUser automatically logon after Windows starts",
+		"options": ["disable",
+		"enable"],
+		"mandatory": 1,
+		"type": "option",
+		"parametersets": ["autoLogon"]
+	},
+	{
+		"name": "autoLogon",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["autoLogon"]
+	},
+	{
+		"name": "domainName",
+		"helpmessage": "Name of the domain to join",
+		"mandatory": 1,
+		"parametersets": ["joinDomain"]
+	},
+	{
+		"name": "domainUser",
+		"helpmessage": "User of the domain (default is administrator)",
+		"parametersets": ["joinDomain"]
+	},
+	{
+		"name": "domainPassword",
+		"helpmessage": "Password of the domain user",
+		"type": "password",
+		"parametersets": ["joinDomain"]
+	},
+	{
+		"name": "dnsIp",
+		"helpmessage": "IP address of DNS server",
+		"parametersets": ["joinDomain"]
+	},
+	{
+		"name": "joinDomain",
+		"helpmessage": null,
+		"type": "switch",
+		"parametersets": ["joinDomain"]
+	}]
+},
+{
+	"script": "https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/workflow/interfaces.ps1",
+	"description": "Run a workflow as a command.\nThis command could also be embedded in a workflow.",
+	"developer": "liuj@vmware.com",
+	"functionalities": ["Workflow"],
+	"synopsis": "Workflow execution",
+	"parameters": [{
+		"name": "name",
+		"helpmessage": "Name of the workflow",
+		"mandatory": 1
+	},
+	{
+		"name": "type",
+		"helpmessage": "Type of the workflow. Default is \u0027serial\u0027",
+		"options": ["serial",
+		"parallel"],
+		"type": "option"
+	},
+	{
+		"name": "actionOnError",
+		"helpmessage": "Action upon error. Default is \u0027stop\u0027",
+		"options": ["stop",
+		"continue"],
+		"type": "option"
+	},
+	{
+		"name": "workflow",
+		"helpmessage": "Workflow in form of JSON. If content is too long, save it in a file and use workflowUrl or file to load it.",
+		"type": "textarea"
+	},
+	{
+		"name": "workflowOnServer",
+		"helpmessage": "Workflow files on webcommander server or online. Each file per line.",
+		"type": "textarea"
+	}]
+},
+{
+  "script": "https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/history/interfaces.ps1",
+  "description": "Search execution history",
+  "developer": "whirls9@hotmail.com",
+  "functionalities": [],
+  "synopsis": "History",
+  "parameters":  [
+   {
+     "name": "user",
+     "helpmessage": "User name"
+   },
+   {
+     "name": "userAddr",
+     "helpmessage": "User IP address"
+   },
+   {
+     "name": "scriptPath",
+     "helpmessage": "Script path"
+   },
+   {
+     "name": "behindTime",
+     "helpmessage":  "Time in form of \u0027yyyy-mm-dd hh:mm:ss\u0027. If defined, only records later than this time are selected"
+   },
+   {
+     "name": "beforeTime",
+     "helpmessage": "Time in form of \u0027yyyy-mm-dd hh:mm:ss\u0027. If defined, only records earlier than this time are selected"
+   },
+   {
+     "name": "resultCode",
+     "helpmessage": "Return code"
+   }]
+},
+{
+  "script": "https://raw.githubusercontent.com/9whirls/webcommander_walnut_remote/master/history/mongodb/interfaces.ps1",
+  "description": "Search execution history",
+  "developer": "whirls9@hotmail.com",
+  "functionalities": [],
+  "synopsis": "History (MongoDB)",
+  "parameters":  [
+   {
+     "name": "user",
+     "helpmessage": "User name"
+   },
+   {
+     "name": "userAddr",
+     "helpmessage": "User IP address"
+   },
+   {
+     "name": "scriptPath",
+     "helpmessage": "Script path"
+   },
+   {
+     "name": "method",
+     "helpmessage": "Method"
+   },
+   {
+     "name": "behindTime",
+     "helpmessage":  "Time in form of \u0027yyyy-mm-dd hh:mm:ss\u0027. If defined, only records later than this time are selected"
+   },
+   {
+     "name": "beforeTime",
+     "helpmessage": "Time in form of \u0027yyyy-mm-dd hh:mm:ss\u0027. If defined, only records earlier than this time are selected"
+   },
+   {
+     "name": "resultCode",
+     "helpmessage": "Return code"
+   }]
+}]

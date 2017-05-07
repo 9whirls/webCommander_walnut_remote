@@ -48,8 +48,7 @@ Param (
     $resultCode
 )
 
-$web = new-object net.webclient
-iex $web.downloadstring('https://raw.githubusercontent.com/9whirls/webcommander_walnut/master/powershell/utils.ps1')
+. .\utils.ps1
 
 $psPath = split-path -parent (pwd).path
 $historyPath = "$psPath\www\history"

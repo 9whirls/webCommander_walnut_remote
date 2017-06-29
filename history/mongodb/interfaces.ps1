@@ -106,7 +106,7 @@ if ($records) {
     $item.Add("result",$_.returncode)
     $item.Add("command",$_.synopsis)
     $item.Add("method",$_.method)
-    $item.Add("log","<a target='blank'  href='/exec.php?hisId=$($_._id)'><i class='fa  fa-eye'></i></a>")
+    $item.Add("log","<a href='/exec.php?hisId=$($_._id)'>...</a>")
     
     $history += $item
   }

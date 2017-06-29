@@ -104,7 +104,7 @@ if ($records) {
     $item.Add("time",$_.time)
     $item.Add("address",$_.useraddr)
     $item.Add("result",$_.returncode)
-    $item.Add("script",$_.script)
+    $item.Add("command",$_.synoposis)
     $item.Add("method",$_.method)
     $item.Add("log","<a target='blank' href='/exec.php?hisId=$($_._id)'><i class='fa fa-eye'></i></a>")
     

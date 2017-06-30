@@ -305,7 +305,8 @@ switch ($pscmdlet.parameterSetName) {
         $script = "Invoke-WmiMethod -path win32_process -name create -argumentlist 'c:\temp\script.bat'"
         $result = $_.executePsTxtRemote($script, "trigger batch script in VM")
       }
-      addToResult $result "raw"
+      # addToResult $result "raw"
+      write-output $result 
     } 
   }
   "autoLogon" {
